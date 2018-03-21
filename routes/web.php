@@ -10,7 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/test', 'EmailController@autoEmail');
+Route::get('/notify', 'EmailController@autoEmail');
 Route::match(['get', 'post'], 'laravel-send-custom-email', 'EmailController@customEmail');
 
 Route::get('/', function () {

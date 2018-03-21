@@ -34,25 +34,26 @@ class EmailController extends Controller
         $email='';
         $beautymail = app(Beautymail::class);
         $jobseekers = DB::table('jobseekers')
-        // ->where('subjects.user_id',Auth::user()->id)
-        ->select('*')->get();
+        ->whereNotNull('Email_Id')
+        ->select('Name as name','Email_Id as email')->get();
 
         
-        foreach ($jobseekers as $jseeker) {
-            // global $name, $email;
+        // foreach ($jobseekers as $jseeker) {
+        //     // global $name, $email;
 
-            $name = $jseeker->name;
-            // $email=$jseeker->email;
-            // var_dump($email);
-            $beautymail->send('emails.welcome', ['name'=>$name], function($message)use ($jseeker)
-            {
-                $message
-                    ->from('info@ameyem.com')
+        //     $name = $jseeker->name;
+        //     // $email=$jseeker->email;
+        //     // var_dump($email);
+        //     $beautymail->send('emails.welcome', ['name'=>$name], function($message)use ($jseeker)
+        //     {
+        //         $message
+        //             ->from('info@ameyem.com')
                     
-                    ->to($jseeker->email, $jseeker->name)
-                    ->subject('Update on interview at Ameyem Geosolutions');
-            });
-        }
+        //             ->to($jseeker->email, $jseeker->name)
+        //             ->subject('Update on interview at Ameyem Geosolutions');
+        //     });
+        // }
+        return $jobseekers; 
         return "Emails sent successfully";
 
 
